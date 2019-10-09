@@ -1,14 +1,11 @@
 package ksb2_hwork3_ListaPojazdow;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class VehicleApiTest {
+class CarApiTest {
 
     @Test
     void getVehicles() {
@@ -41,10 +38,10 @@ class VehicleApiTest {
     @Test
     void addVehicle() {
         //given
-        List<Vehicle> vehicleList = new ArrayList<>();
-        vehicleList.add(new Vehicle(5,"Mazda", "3", "Black"));
+        List<Car> carList = new ArrayList<>();
+        carList.add(new Car(5,"Mazda", "3", "Black"));
         //when
-        Vehicle id = vehicleList.get(5);
+        Car id = carList.get(5);
 
         //then
       //  assertArrayEquals(5,);

@@ -1,13 +1,13 @@
 package ksb2_hwork3_ListaPojazdow;
 
-public class Vehicle {
+public class Car {
 
    private int id;
     private String mark;
     private String model;
     private String color;
 
-    public Vehicle(int id, String mark, String model, String color) {
+    public Car(int id, String mark, String model, String color) {
         this.id = id;
         this.mark = mark;
         this.model = model;
@@ -15,7 +15,7 @@ public class Vehicle {
 
     }
 
-    public Vehicle() {
+    public Car() {
     }
 
     public int getId() {
@@ -52,7 +52,7 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return "Vehicle{" +
+        return "Car{" +
                 "id=" + id +
                 ", mark='" + mark + '\'' +
                 ", model='" + model + '\'' +

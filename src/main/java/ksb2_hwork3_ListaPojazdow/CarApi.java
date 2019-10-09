@@ -10,28 +10,28 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/vehicles")
-public class VehicleApi {
+@RequestMapping("/car")
+public class CarApi {
 
-    private List<Vehicle> vehicleList;
+    private List<Car> carList;
 
-    public VehicleApi() {
-        this.vehicleList = new ArrayList<>();
-        vehicleList.add(new Vehicle(1, "Fiat", "Bravo", "gray"));
-        vehicleList.add(new Vehicle(2, "Ford", "Focus", "white"));
-        vehicleList.add(new Vehicle(3, "Opel", "Astra", "red"));
+    public CarApi() {
+        this.carList = new ArrayList<>();
+        carList.add(new Car(1, "Fiat", "Bravo", "gray"));
+        carList.add(new Car(2, "Ford", "Focus", "white"));
+        carList.add(new Car(3, "Opel", "Astra", "red"));
     }
 
     @GetMapping(produces = {
             MediaType.APPLICATION_XML_VALUE,
             MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<List<Vehicle>> getVehicles() {
-        return new ResponseEntity<>(vehicleList, HttpStatus.OK);
+    public ResponseEntity<List<Car>> getVehicles() {
+        return new ResponseEntity<>(carList, HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Vehicle> getVehiclesById(@PathVariable int id) {
-        Optional<Vehicle> first = vehicleList.stream().filter(vehicle -> vehicle.getId() == id).findFirst();
+    public ResponseEntity<Car> getVehiclesById(@PathVariable int id) {
+        Optional<Car> first = carList.stream().filter(car -> car.getId() == id).findFirst();
         if (first.isPresent()) {
             return new ResponseEntity<>(first.get(), HttpStatus.OK);
         }
@@ -40,7 +40,7 @@ public class VehicleApi {
 
         @PatchMapping("/{id}/{color}")
         public ResponseEntity modVehicleElement(@PathVariable long id, @PathVariable String color){
-            Optional<Vehicle> firstCar = vehicleList.stream().filter(carFromList -> carFromList.getId() == id).findFirst();
+            Optional<Car> firstCar = carList.stream().filter(carFromList -> carFromList.getId() == id).findFirst();
             if(firstCar.isPresent()){
                 firstCar.get().setColor(color);
                 return new ResponseEntity(HttpStatus.OK);
@@ -49,18 +49,18 @@ public class VehicleApi {
         }
 
     @PostMapping
-    public ResponseEntity addVehicle(@RequestBody Vehicle vehicle) {
-        boolean add = vehicleList.add(vehicle);
+    public ResponseEntity addVehicle(@RequestBody Car car) {
+        boolean add = carList.add(car);
         if (add) {
             return new ResponseEntity(HttpStatus.CREATED);
         }
         return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 }
-    public ResponseEntity modVehicle(@RequestBody Vehicle newVehicle) {
-        Optional<Vehicle> first = vehicleList.stream().filter(vehicle -> vehicle.getId() == newVehicle.getId()).findFirst();
+    public ResponseEntity modVehicle(@RequestBody Car newCar) {
+        Optional<Car> first = carList.stream().filter(car -> car.getId() == newCar.getId()).findFirst();
         if (first.isPresent()) {
-            vehicleList.remove(first.get());
-            vehicleList.add(newVehicle);
+            carList.remove(first.get());
+            carList.add(newCar);
 
             return new ResponseEntity(HttpStatus.OK);
         }
@@ -69,9 +69,9 @@ public class VehicleApi {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity removeVehicle(@PathVariable int id) {
-        Optional<Vehicle> first = vehicleList.stream().filter(vehicle -> vehicle.getId() == id).findFirst();
+        Optional<Car> first = carList.stream().filter(car -> car.getId() == id).findFirst();
         if (first.isPresent()) {
-            vehicleList.remove(first.get());
+            carList.remove(first.get());
             return new ResponseEntity<>(first.get(), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
